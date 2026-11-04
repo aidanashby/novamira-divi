@@ -30,6 +30,7 @@ All read between 14 October 2026 (chat session).
 - cjsimon2/Divi5-ToolKit: https://github.com/cjsimon2/Divi5-ToolKit
 - wisnuub/claude-connector: https://github.com/wisnuub/claude-connector/releases
 - Kntnt wp-skills (uses the Novamira MCP): https://github.com/Kntnt/kntnt-wp-skills/releases/tag/v0.2.0
+- Divi MCP sneak peek (Elegant Themes' founder, video, seen 4 November 2026; URL [placeholder], transcript only): unreleased official MCP exposing Divi's agent tools through the WordPress Abilities API. Summarised in docs/00.
 
 ## WordPress Studio and platform
 - Studio custom domains and HTTPS: https://alternativeto.net/news/2026/1/wordpress-studio-1-7-enhances-the-cli-with-local-site-management-authentification-and-more (CLI) and https://alternativeto.net/news/2025/3/wordpress-enhances-local-development-tool-studio-with-custom-domains-and-https-support

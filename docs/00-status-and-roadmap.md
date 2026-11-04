@@ -74,6 +74,71 @@ The skill sources in `skills/` match the stored skills byte for byte (md5 checke
 |---|---|---|
 | Real sites | Use the skills on Foodbank and Bristol Charities staging builds | Staging sites with Novamira, never live |
 | Upgrade checks | Divi ships weekly | After each Divi or Novamira update, read the changelogs and rerun only the tests the changes touch (T23 is the pattern) |
+| Divi MCP alongside Novamira | Elegant Themes is releasing an official Divi MCP that would replace most of the Divi write route | Its release; the plan is the next section |
+
+## Divi MCP alongside Novamira (planned, 4 November 2026)
+
+Nothing here has been run. It plans for a product that is not yet released, so every claim about it is [Web] (a sneak-peek video by Elegant Themes' founder, 4 November 2026, listed in docs/07) or [Inferred]. No skill rule changes until a test on a site produces evidence (CLAUDE.md).
+
+### What the video says [Web]
+
+- Elegant Themes will release a Divi MCP. It exposes Divi's existing agent tools through WordPress's Abilities API, and a client connects with an application password. The setup generates a connect prompt, as Novamira does.
+- The demo agent listed 69 tools, and the speaker said "over 150". Both numbers cannot describe one build, so the final tool list is unknown.
+- It builds pages from native modules, edits attributes, creates variables and presets, edits Theme Builder templates and assigns them, and publishes. The speaker says output is validated.
+- Tools are scoped by severity, and some need approval, with deleting a preset, variable or component given as the example.
+- A skill for building a variable system ships with it. Image generation and stock image tools were not in the demo build.
+- It is free for all Divi users and needs no Divi AI.
+- Not stated: release date, minimum Divi, WordPress and PHP versions, the endpoint path, whether it covers Loop Builder, ACF dynamic content or custom post types, and how approvals are collected.
+
+### What stays with Novamira
+
+The Divi MCP covers Divi. Novamira's free tier covers everything else, and nothing in the video overlaps it: custom post types, ACF field groups and values, options, plugin and theme files, the database, users, menus, media imports, caches, `execute-php` for anything without a dedicated tool, and reading the site for diagnosis. The WP Studio lock fix (`tools/studio-divi-variables-lock.php`) is a Divi filter that is independent of both, and the MCP's variable tools very probably hit the same lock on SQLite [Inferred].
+
+### Three ways the two could connect
+
+Which one applies is a fact to find, not a choice to make. Phase 1 settles it.
+
+| | Topology | How Claude sees it | Consequences |
+|---|---|---|---|
+| A | Two servers: `/wp-json/mcp/novamira` and a separate Divi endpoint | Two MCP servers in `/mcp`, two application passwords | Simplest to reason about. Claude routes by tool name. Two credentials to manage and revoke per site. |
+| B | Divi's abilities appear in Novamira's Abilities Hub and run through Novamira's `execute-ability` gateway | One server, Divi tools reached by discover and execute | One credential. Novamira's per-ability toggles can switch Divi tools off. Possible only if Divi registers its abilities as public to the adapter. docs/03 records that the Hub auto-discovers abilities registered through the Abilities API, which makes this plausible [Docs, Inferred]. |
+| C | Divi MCP only, Novamira dropped | Divi tools only | Loses PHP, files and everything outside Divi. Not planned, because those are needed for CPTs, ACF and options. |
+
+If A, the Divi MCP is a second thing to install and trust on every site. If B, it may arrive with a Divi update and need no setup beyond enabling it.
+
+### Routing rule to write (after Phase 1)
+
+- Writing Divi objects (pages, sections and modules, Theme Builder templates and assignments, global colours, variables, presets, library items) uses a Divi MCP tool when one exists.
+- Novamira PHP may read Divi data to inspect it, and writes Divi data only where no Divi tool exists, saying so first.
+- Everything outside Divi uses Novamira.
+- When a task needs both (a CPT with ACF fields, a Theme Builder template for it, a loop page), Novamira creates the data model and the Divi MCP builds on it. Claude reads the result back after each handoff.
+
+### Risks, and what each needs
+
+1. **PHP bypasses the Divi MCP's gates.** Novamira runs as the administrator with unrestricted PHP. It can delete a preset or variable, or call a Divi ability directly with `wp_get_ability()`, without any approval prompt the MCP would show [Inferred]. Approvals protect only the calls made through the MCP, so the real guard stays the written rule: never delete a Divi object without the user's explicit approval, whichever route. Test whether an approval is a server-side check or only a client prompt.
+2. **Two sets of guidance competing.** Skills trigger on their descriptions, and several can fire together (docs/03). `divi5-core`, `-styling`, `-modules`, `-theme-builder` and `-presets` all say to write through PHP, and the Divi MCP ships its own skill. An agent given both may follow the older PHP route. These five skills are cut to policy and edge-case notes, or removed, once the MCP covers their area.
+3. **Two write routes to one object.** A page saved by the MCP and then edited through `serialize_blocks()`, or a layout edited by both, could leave Divi's CSS and module caches stale (T33). Use one route per object type and purge after a layout or component edit, as now.
+4. **Behaviour the repo has tested and the MCP may not match.** Draft by default, publish only on request, no overwrite of existing pages, and the design showcase gate. In the demo the agent published a page it was asked to publish. It built a whole site in one go, which `divi5-design-system` forbids until approval. These stay as policy rules in `CLAUDE.md` and the User Context.
+5. **Unreleased software on a real site.** The same rule as for Novamira: a Studio site first, then a staging copy, never live.
+6. **The Novamira Pro question reopens in part.** Gate (e) said no Pro because the free route works. The Divi MCP is free and vendor-maintained, so it removes the main reason Pro's Divi expertise might be wanted, and no purchase decision is needed.
+7. **Two charities, two sites.** One connection per site, never both sites in one session, as the existing "ask which site" rule says. Applies to the Divi endpoint as much as Novamira's.
+
+### Plan
+
+| Phase | Work | Exit condition |
+|---|---|---|
+| 0. Watch | Read the release notes when the MCP ships. Record the minimum Divi, WordPress and PHP versions, the endpoint and the tool list in docs/03 or a new reference file. | Release is public. |
+| 1. Probe (Studio site) | Install it. Run discover through Novamira's adapter and look for Divi abilities. Check the Abilities Hub. Connect through the generated prompt. Decide topology A, B or C. Count the tools and read their names, descriptions and approval flags. Check the variable save on SQLite with and without the lock fix. | Topology and tool list recorded as [Run]. |
+| 2. Compare | Rerun a subset of docs/09 through the MCP and compare with the PHP route: T1 round trip (an MCP-built page opens and saves in the builder), T10 styling, T13 to T16 Theme Builder, T14 to T18 loops with ACF, T19 presets, T21 and T25 variables, T12 clone. Add a new test for each gap or failure. Also test the handoff: Novamira creates a CPT and ACF fields, the MCP builds the template and loop. Also test whether approvals can be bypassed from `execute-php`. | A pass, fail or not-covered mark per area, in docs/09 with the Divi and Novamira versions. |
+| 3. Rules | Write the routing rule in the User Context and `CLAUDE.md`. Cut or remove the five superseded skills in the order the Compare phase supports. Keep `divi5-design-system`, `divi5-page-production`, a `site-design` skill and the safety rules. Remove the `novamira-design` sentence if the MCP's own skill makes it unnecessary. | A fresh agent, given only the new rules, completes a CPT plus loop plus template task using both servers. |
+| 4. Setup | Change `novamira-setup`: check the Divi MCP is present and enabled, record its topology, upload only the surviving skills, update the manifest, version rules and smoke test. Keep the SQLite lock fix step. | A fresh-site install passes. |
+| 5. Release | README, CHANGELOG, docs/10 addendum (what changed since gate e), and a note on the Divi version range tested. | Tagged release. |
+
+### Decisions the user will need to make
+
+- After Phase 1: whether to adopt the MCP at all, once its tool list is known. Skipping it keeps the repo as it is.
+- After Phase 2: for each area where both routes work, which one is the default. The proposal is the MCP, because it is validated and vendor-maintained, with the PHP skills kept only where the MCP fails.
+- Whether to keep the approval gates as written rules only, or to restrict Novamira's `execute-php` on a site that matters (Abilities Hub toggles, Read Mode needs Pro).
 
 ## Setup skill: version rules (decided 15 October 2026)
 
