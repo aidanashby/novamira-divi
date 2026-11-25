@@ -161,6 +161,11 @@ The `novamira-setup` Claude Code skill installs the Novamira skills and User Con
 - Logged-in previews skip Divi's dynamic-assets cache, so cache bugs only show on published pages.
 - The browser pane only shows drafts once the user signs in. `.et-l--body` wraps ordinary pages too, so check for content, not that class.
 
+## Open from T35 (25 November 2026)
+
+- Carry the T35 findings (docs/09) into `divi5-styling`, `divi5-modules` and `divi5-dynamic`, then sync the stored copies.
+- The site build that produced T35 is paused. Its state and next steps are in the maintainer's git-ignored `site-logs/`.
+
 ## Resuming in a new session
 
 1. Read `CLAUDE.md` (and `CLAUDE.local.md` if present), this file and the README.

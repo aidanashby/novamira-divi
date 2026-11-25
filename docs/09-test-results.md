@@ -455,3 +455,27 @@ Later revisions to the same page, verified in a browser at 1280px, 768px and 375
 - One desktop reading showed a wrong width and an overflow that a reload cleared.
 
 Skills updated from these: `divi5-core`, `divi5-dynamic`, `divi5-theme-builder`, `divi5-modules`, `divi5-page-production`, `divi5-design-system`. All eight stored skills on the staging site match the repo.
+
+## T35. First use on Divi 5.19.1 and Novamira 1.12.16 [Run, 2026-11-25]
+
+A site running WordPress 7.1.5, Divi 5.19.1 and Novamira 1.12.16, reached through the Novamira CLI 1.3.6 (REST, no MCP). It was a production site, used at its owner's explicit request as an exception to the repo rule; pages were built as drafts. In progress: the skills have not been changed for these findings.
+
+Held up as written:
+
+- All eight skills uploaded through `skill-write` and matched by md5. The `divi5-core` recipe read back identical and rendered.
+- `prepare_data()` on a copy of the presets returned every existing preset unchanged, so it works as a dry run before `save_data()`.
+- A Theme Builder template assigned to four draft pages by ID (`singular:post_type:page:id:<ID>`) applied in signed-in previews; the other templates' assignments were unchanged.
+- ACF free registered post types, taxonomies and field groups through `acf_import_post_type()`, `acf_import_taxonomy()` and `acf_import_field_group()`; they were registered on the next request.
+
+New or different:
+
+- Button padding set on `button.decoration.spacing` in a module preset had no effect; on `module.decoration.spacing` it worked.
+- Headings inherited letter spacing from the theme; `letterSpacing` `"0px"` in the heading font cleared it.
+- A Text module with line height `1em` showed a scrollbar: the module had `overflow-y: auto` (52px font, 52px box, 59px content). `module.decoration.overflow` `visible` did not clear it. At 60px, `1.2em` still showed one.
+- `module.decoration.layout` `display` `"grid"` with `gridColumnWidths` `"equal"`, `gridColumnCount` per breakpoint and `columnGap` and `rowGap` laid out Groups as card grids.
+- `module.advanced.html` `elementType` rendered a Group as `nav`, `ol` or `li`. `aria-label` set through `module.decoration.attributes` reached the `nav`.
+- `module.decoration.disabledOn` with `"on"` or `"off"` at each breakpoint switched between a desktop and a phone header.
+- The module labelled Post Carousel is `divi/fullwidth-portfolio`. Group Carousel (`divi/group-carousel`) accepts a looped Group as its child: a read-only render gave one slide per post.
+- Testimonial `quoteIcon.decoration.icon` `{"show":"off"}` hid the quote mark. Contact form checkbox options take `link` `{url, text}`.
+- An empty loop prints "No Results Found." in an `h2`.
+- Loops can be checked without publishing: in one `execute-php` call, add a `pre_get_posts` action that includes drafts, then render the page. Adding a filter on `divi_module_options_loop_post_type_results_query_args` did not affect the render.
