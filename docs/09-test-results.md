@@ -479,3 +479,16 @@ New or different:
 - Testimonial `quoteIcon.decoration.icon` `{"show":"off"}` hid the quote mark. Contact form checkbox options take `link` `{url, text}`.
 - An empty loop prints "No Results Found." in an `h2`.
 - Loops can be checked without publishing: in one `execute-php` call, add a `pre_get_posts` action that includes drafts, then render the page. Adding a filter on `divi_module_options_loop_post_type_results_query_args` did not affect the render.
+
+Second session, same site (Divi 5.19.1, ACF 6.8.12; read from source, rendered or checked in a browser as stated):
+
+- Terms from two taxonomies in `includePostWithSpecificTerms` are joined with OR. Adding any `excludePostWithSpecificTerms` entry makes Divi join every part with AND (source, and the built `tax_query` read back).
+- An ACF File field (return format URL) used as `loop_post_meta_key_<field>` in a Link module `linkUrl` gave the file's URL (simulated value, rendered). Two dynamic values in one `linkUrl`, one of them empty, gave the other's URL, so one card link can serve a file field and a URL field. If both hold a value they join into a broken link.
+- A post type with `publicly_queryable` off and `public` on still rendered in a loop and stayed in the public post type list. A direct request by ID returned 404.
+- The contact form hides radio and checkbox inputs with `display: none`, so Tab skips them and a required checkbox cannot be ticked by keyboard (browser). Module CSS in `css.desktop.value.freeForm` (token `selector`) that shows them at opacity 0, with a focus ring on the label's `i`, fixed it: Tab, arrow keys and Space worked. The groups have no `fieldset` or linked label.
+- Contact form label font: `field.decoration.labelFont.font`; option text: `checkbox.decoration.font.font` and `radio.decoration.font.font`. Receiver: `email.advanced.receiver`; when empty Divi sends to the site admin address (source).
+- The empty-loop message does not get the looped module's own inline styling (a white background was missing, so it was dark on navy). A background from a module preset did apply.
+- In a flex row, `sizing.width` with `flexShrink` `"0"` on a Text module still shrank at phone width; `minWidth` held it.
+- Group Carousel arrows are spans with `role="button"`, `tabindex` and labels; `arrows.advanced.size` set their width.
+- Saving a draft through `wp_update_post()` made LiteSpeed rebuild the public pages' cache; their content was the same.
+- `parse_blocks()` then `serialize_blocks()` returned three Divi pages unchanged, so edits can be made in place on the parsed blocks.

@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-- First findings from Divi 5.19.1 and Novamira 1.12.16 recorded in docs/09 (T35). The skills are not yet updated for them.
+- First findings from Divi 5.19.1 and Novamira 1.12.16 recorded in docs/09 (T35), with a second session on loop term filters, file links, contact form keyboard access and editing pages in place. The skills are not yet updated for them.
 - The repository is renamed `novamira-divi` (from `novamira-divi5`), so the name suits later Divi versions. GitHub redirects the old addresses. The skills keep their `divi5-` names because they are written for Divi 5.
 - Skills from building a real campaign page (T34): date display conditions and date windows, page caches and date switches, a page without the title bar, column order on phones, icon list alignment, countdown limits, contrast and all-width checks, no facts from general knowledge, safe link building.
 - From a real page on a staging site (T34): number counter percent sign, icon list check marks, image aspect ratio with cover fit.
