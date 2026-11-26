@@ -26,7 +26,7 @@ Post meta written by the builder: `_et_pb_use_builder on`, `_et_pb_use_divi_5 on
 
 | Draft | Method | Stored intact | Compared with T0 |
 |---|---|---|---|
-| ID 24 "T1a Hand-written" | Literal string, minimal docs/05 skeleton (row with `flexColumnStructure` only, column with `flexType` only), JSON escapes typed by hand, text wrapped in `<p>` | Yes | Same block names and value shapes. Lacks `columnStructure`, `advanced.type` and `flexWrap`. |
+| ID 24 "T1a Hand-written" | Literal string, minimal docs/archive/05-divi5-authoring-notes.md skeleton (row with `flexColumnStructure` only, column with `flexType` only), JSON escapes typed by hand, text wrapped in `<p>` | Yes | Same block names and value shapes. Lacks `columnStructure`, `advanced.type` and `flexWrap`. |
 | ID 25 "T1b Serialised" | PHP arrays, T0's attribute set, `serialize_blocks()` | Yes | **Byte-identical to T0** after removing whitespace between blocks and swapping the label text. |
 
 Both use meta `_et_pb_use_builder on`, `_et_pb_use_divi_5 on`, `_et_pb_page_layout et_full_width_page`, `_et_pb_side_nav off`, `_et_pb_post_hide_nav default`.
@@ -43,7 +43,7 @@ The user saved a section as a component (in 5.15.1 "Save to Library" is under th
 - On the page, each instance is `<!-- wp:divi/global-layout {"globalModule":"22","blockName":"divi/section","builderVersion":"5.15.1","localAttrs":{"builderVersion":"5.15.1"},"localAttrOverridePaths":[]} -->` wrapping a full copy of the component's children (row, column, text), each with the same `syncNodeId` as the source and `localAttrOverridePaths: []`. The section block itself is replaced by `divi/global-layout`.
 - `globalModule` is a string post ID. `divi/global-slot` was not used (it is for slots inside a component).
 
-Verdict: `divi/global-layout` is current in 5.15.1. docs/04's "probably stale" was wrong. Skill rule: do not hand-write component instances; insert them in the builder, or copy an existing instance's markup exactly.
+Verdict: `divi/global-layout` is current in 5.15.1. docs/archive/04-divi5-skill-audit.md's "probably stale" was wrong. Skill rule: do not hand-write component instances; insert them in the builder, or copy an existing instance's markup exactly.
 
 ## T4. Dynamic-assets cache [Run + source, 2026-10-14]
 
@@ -184,7 +184,7 @@ Variables: the user reports that variables cannot be saved in the builder on 5.1
 
 ## T19. Presets [Run, 2026-10-14]
 
-Under the user's one-day permission. The user made a module preset (Button) and an option-group preset (Heading, Title Text) in the builder and applied them on T0 Baseline. Storage: option `builder_global_presets_d5`, read with `GlobalPreset::get_data()`: `module[<block>]` and `group[<group name>]`, each `{default, items}`; items carry `attrs` and `styleAttrs` (identical for style settings), `version`, `created`, `updated` in milliseconds; group items add `groupName` `divi/font`, `moduleName`, `groupId` `designTitleText`. The builder also created empty default presets. On a module: `"modulePreset":["<id>"]` (a list) and `"groupPreset":{"designTitleText":{"presetId":["<id>"],"groupName":"divi/font"}}`. This corrects two divi5-skill claims (docs/04 and docs/05): `modulePreset` is a list, and `groupPreset` is current and valid.
+Under the user's one-day permission. The user made a module preset (Button) and an option-group preset (Heading, Title Text) in the builder and applied them on T0 Baseline. Storage: option `builder_global_presets_d5`, read with `GlobalPreset::get_data()`: `module[<block>]` and `group[<group name>]`, each `{default, items}`; items carry `attrs` and `styleAttrs` (identical for style settings), `version`, `created`, `updated` in milliseconds; group items add `groupName` `divi/font`, `moduleName`, `groupId` `designTitleText`. The builder also created empty default presets. On a module: `"modulePreset":["<id>"]` (a list) and `"groupPreset":{"designTitleText":{"presetId":["<id>"],"groupName":"divi/font"}}`. This corrects two divi5-skill claims (docs/archive/04-divi5-skill-audit.md and docs/archive/05-divi5-authoring-notes.md): `modulePreset` is a list, and `groupPreset` is current and valid.
 
 Claude created two presets with `prepare_data()` and `save_data()` (Divi's own save path; `save_data()` clears static CSS site-wide) and applied them on draft 130. Browser: the blurb preset gave background, padding and radius; the heading group preset gave Georgia, navy, 36px; the user's 40px preset applied; a module's own colour beat the preset's (title red over navy, button green over the preset's red). Button colours were confirmed by screenshot: a script reading the computed colour reported transparent, probably because of Divi's button background transition. The skill's create-and-edit recipe, run as written, created and edited a third preset with defaults and other presets unchanged. **Pass.** New skill `divi5-presets` keeps preset writes gated.
 
@@ -209,7 +209,7 @@ Draft ID 46 built with the round-2 recipe: `equal-columns_3` with three blurbs (
 
 Source: the site's own theme, `<Studio sites folder>\divi-5\wp-content\themes\Divi` (style.css `Version: 5.15.1`), so no 5.14.0 versus 5.15.1 gap. Module metadata is in `includes/builder-5/visual-builder/packages/module-library/src/components/<module>/` (116 `module.json` files, plus `module-default-render-attributes.json` and `module-default-printed-style-attributes.json`). PHP is in `includes/builder-5/server/`.
 
-| Claim (docs/05) | Result |
+| Claim (docs/archive/05-divi5-authoring-notes.md) | Result |
 |---|---|
 | Heading text at `title.innerContent`, tag at `title.decoration.font.font.<bp>.value.headingLevel` | Pass. Default `headingLevel` is `h1`. |
 | Text content key is `content` (`content.innerContent`), fonts `content.decoration.bodyFont` / `headingFont` | Pass. |
@@ -399,7 +399,7 @@ A separate Claude Code session in a fresh clone (HEAD `1f0da77`) ran `novamira-s
 
 ## T32. Fresh-agent regression run on the staging site [Run, 2026-10-22]
 
-Five fresh Haiku agents, each limited to the dev-site Novamira tools and told to start from `novamira/agent-context`, did the four docs/06 sample tasks plus one for the T30 rules. Claude then checked every draft independently (status, builder meta, block names, version stamps, round-trip, render).
+Five fresh Haiku agents, each limited to the dev-site Novamira tools and told to start from `novamira/agent-context`, did the four docs/archive/06-recommendations-and-plan.md sample tasks plus one for the T30 rules. Claude then checked every draft independently (status, builder meta, block names, version stamps, round-trip, render).
 
 | Task | Result | Skills loaded | Score |
 |---|---|---|---|

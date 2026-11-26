@@ -1,14 +1,25 @@
 # Changelog
 
-## Unreleased
+## 1.2.0 (26 November 2026)
 
-- First findings from Divi 5.19.1 and Novamira 1.12.16 recorded in docs/09 (T35), with a second and third session on loop term filters, file links, contact form keyboard access, editing pages in place, counters, semantics and sticky sections.
-- Skills updated from Divi 5.19.1 (T35): sticky per breakpoint and while stuck, grid layout, disabledOn, heading letter spacing, line height on large numbers, button padding (`divi5-styling`); Number Counter title and width, Group Carousel for card carousels, breadcrumbs, testimonial quote mark, contact form settings and keyboard access, semantic tags, accessibility attributes and layer names (`divi5-modules`); testing loops without publishing, taxonomy OR and AND, the empty-loop message, File fields in links (`divi5-dynamic`).
+From a real campaign page on a staging site (T34) and a four-page build on Divi 5.19.1 (T35). Tested on Divi 5.16.0 and 5.19.1, Novamira 1.12.12 and 1.12.16, WordPress 7.1.3 and 7.1.5, ACF 6.8.12.
+
+### Skills
+
+- `divi5-styling`: sticky settings per breakpoint and values that apply only while stuck; Group grid layouts with column counts per breakpoint; hiding a module per breakpoint (`disabledOn`); heading letter spacing; line height on large numbers; button padding on the module's own spacing.
+- `divi5-modules`: Number Counter titles (always headings) and width; Group Carousel for carousels of cards (the module labelled Post Carousel is the old Portfolio); breadcrumbs; hiding the testimonial quote mark; contact form receiver, message pattern, labels, styling paths and the keyboard-access gap; a new section on semantic tags (`nav`, `ul`, `li`, `section`), accessibility attributes and builder layer names.
+- `divi5-dynamic`: checking a loop without publishing; how two taxonomy filters combine (OR, or AND once an exclude is added); the empty-loop message; File fields in links.
+- From T34: date display conditions and date windows, page caches and date switches, a page without the title bar, column order on phones, icon list alignment, countdown limits, contrast and all-width checks, no facts from general knowledge, safe link building, number counter percent sign, icon list check marks, image aspect ratio with cover fit.
 - Fixed: the contact form recipient is `email.advanced.receiver`; `email.innerContent` is the message pattern.
-- Docs review: README and `novamira-setup` list the tested versions (Divi 5.19.1, Novamira 1.12.16) and mention the Novamira CLI; docs/00 status, docs/03 CLI notes, docs/10 update note; docs/05, 08 and 11 marked historical; site and campaign names removed from docs/00 and docs/09; manifest descriptions cover the new skill content; `divi5-styling` no longer refers to one site's mu-plugin.
+- `divi5-styling` no longer refers to one site's mu-plugin; `divi5-presets` drops a note about the upstream skill; `manifest.json` descriptions cover the new content.
+
+### Setup and docs
+
+- README and `novamira-setup` list the tested versions and mention the Novamira CLI connection. The setup skill is still written for the MCP connection.
+- docs/00 status, docs/03 (how the CLI was used), docs/09 (T34 and T35), docs/10 (update note).
+- Finished or superseded documents moved to `docs/archive/`: the first session log, the audit of `divilovewp/divi5-skill`, the original authoring notes, the original plan and the design brief. docs/08 is marked as no longer maintained (site writes are logged in the git-ignored `site-logs/`). The superseded User Context texts are removed from `docs/user-context-proposed.md`.
+- Public docs no longer name the organisations or campaigns the skills were used for.
 - The repository is renamed `novamira-divi` (from `novamira-divi5`), so the name suits later Divi versions. GitHub redirects the old addresses. The skills keep their `divi5-` names because they are written for Divi 5.
-- Skills from building a real campaign page (T34): date display conditions and date windows, page caches and date switches, a page without the title bar, column order on phones, icon list alignment, countdown limits, contrast and all-width checks, no facts from general knowledge, safe link building.
-- From a real page on a staging site (T34): number counter percent sign, icon list check marks, image aspect ratio with cover fit.
 
 ## 1.1.1 (22 October 2026)
 

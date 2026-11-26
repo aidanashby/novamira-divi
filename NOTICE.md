@@ -4,7 +4,7 @@ This project's own content is under the MIT licence in [LICENSE](LICENSE). The t
 
 ## divilovewp/divi5-skill
 
-The Divi 5 notes in `docs/05-divi5-authoring-notes.md` and any Novamira skills adapted from them are derived from `divilovewp/divi5-skill` (https://github.com/divilovewp/divi5-skill), reviewed at v0.6.9 (26 August 2026, Divi Builder 5.11.1).
+The Divi 5 notes in `docs/archive/05-divi5-authoring-notes.md` and any Novamira skills adapted from them are derived from `divilovewp/divi5-skill` (https://github.com/divilovewp/divi5-skill), reviewed at v0.6.9 (26 August 2026, Divi Builder 5.11.1).
 
 Licence: MIT. Copyright (c) 2026 Shashank Gupta (divilove.com).
 

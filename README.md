@@ -135,11 +135,11 @@ Every rule in the skills was written to the test site, rendered, read back and, 
 | `.claude/skills/novamira-setup/` | The Claude Code skill that installs everything on a site |
 | `tools/studio-divi-variables-lock.php` | The lock fix for WP Studio (SQLite) sites |
 | `docs/00-status-and-roadmap.md` | Status, open items, roadmap, learnings, how to resume |
-| `docs/01` to `docs/07` | Background: environment, session log, Novamira reference, audit of `divilovewp/divi5-skill`, Divi 5 authoring notes, the original plan, sources |
+| `docs/01`, `docs/03`, `docs/07` | Background: environment, Novamira reference, sources |
 | `docs/08-site-change-log.md` | Every write made to the project's test sites, with how to undo it |
 | `docs/09-test-results.md` | Every test and its evidence |
 | `docs/10-decision-memo.md` | Free versus Pro, design tokens |
-| `docs/11-design-and-content-workflow-expansion.md` | Design for the design-system and page-production skills |
+| `docs/archive/` | Finished or superseded documents kept as history: first session log, audit of `divilovewp/divi5-skill`, the original Divi 5 authoring notes, the original plan, the design brief for the design-system and page-production skills |
 | `CLAUDE.md` | Working rules for Claude on any connected site |
 | `site-logs/` | Created by Claude on your computer: a log of changes to each of your sites (git-ignored) |
 | `LICENSE` | MIT licence for this project's own content |

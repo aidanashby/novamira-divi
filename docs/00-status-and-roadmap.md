@@ -18,7 +18,7 @@ The Studio site runs Divi 5.16.0 and Novamira 1.12.11. On 21 October:
 - Moving date windows: `divi5-dynamic` explains Date Conditions for Divi, verified on a Movies loop: `after` and `before`, undated posts and the empty state (T29).
 - README rewritten for a public audience.
 
-The original plan (docs/06, "Recommended order") is complete, and the scope was then widened to Theme Builder, dynamic content and custom post types. Both gates the user owned are decided: no Novamira Pro (gate e), and Divi globals stay the source of truth for design tokens (gate d, option 1). See docs/10.
+The original plan (docs/archive/06-recommendations-and-plan.md, "Recommended order") is complete, and the scope was then widened to Theme Builder, dynamic content and custom post types. Both gates the user owned are decided: no Novamira Pro (gate e), and Divi globals stay the source of truth for design tokens (gate d, option 1). See docs/10.
 
 ### On the Studio site now
 
