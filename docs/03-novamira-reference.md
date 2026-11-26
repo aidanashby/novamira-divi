@@ -92,7 +92,7 @@ There is no dedicated ability for posts, terms, media, post meta or User Context
 - Endpoint with application passwords: `/wp-json/mcp/novamira`. OAuth: `/wp-json/mcp/novamira-oauth`.
 - Application passwords authenticate as the creating admin user, over HTTPS or on sites where `WP_ENVIRONMENT_TYPE` is `local`. Create one per client and name it. Manage Connections shows last-used times and lets you revoke.
 - Clients that talk to the site directly from the cloud (Claude.ai) can only use OAuth and are affected by host or CDN bot filtering. Local clients use the application-password bridge.
-- Novamira CLI is the leanest route for terminal agents such as Claude Code (72 agents supported by its installer). Not used so far.
+- Novamira CLI is the leanest route for terminal agents such as Claude Code (72 agents supported by its installer). Used for T35 (CLI 1.3.6): profiles per site, `novamira --site <profile> run <ability> --input @file.json --json`, OAuth tokens in the OS credential store, `--yes` needed for abilities marked destructive such as `execute-php`.
 - A security plugin (Patchstack, Solid Security, Wordfence) can hide application passwords.
 
 ## Pro, and other products [Docs + Web]
@@ -103,4 +103,4 @@ There is no dedicated ability for posts, terms, media, post meta or User Context
 
 ## Not examined
 
-- Novamira CLI details, HQ, the Pro pages other than the Divi page, the docs on the sandbox and crash recovery, and the Hub's option names.
+- HQ, the Pro pages other than the Divi page, the docs on the sandbox and crash recovery, and the Hub's option names.

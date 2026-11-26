@@ -1,6 +1,6 @@
 # 08. Site change log
 
-Record every write to the Studio site `divi-5` (`http://localhost:8881`) here: date, what, how, how verified, how to undo. Reads do not need logging.
+Writes to the Studio site `divi-5` (`http://localhost:8881`) up to 22 October 2026: date, what, how, how verified, how to undo. Not maintained since: writes to every site are now logged in the git-ignored `site-logs/` (see CLAUDE.md).
 
 ## State at handoff (14 October 2026)
 

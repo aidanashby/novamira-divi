@@ -2,7 +2,11 @@
 
 Planning, progress tracking and next steps for the project. The README describes the project; this file says where it stands. Test evidence is in docs/09, every site write in docs/08.
 
-## Status (22 October 2026)
+## Status (26 November 2026)
+
+The skills were used on Divi 5.19.1 and Novamira 1.12.16 for a four-page build on a production site, at its owner's request and as an exception to the repo rule (T35, three sessions, 25 and 26 November). Findings are in `divi5-styling`, `divi5-modules` and `divi5-dynamic` and synced to that site. The Studio and staging test sites still hold the October copies.
+
+### Status on 22 October 2026
 
 The Studio site runs Divi 5.16.0 and Novamira 1.12.11. On 21 October:
 
@@ -34,7 +38,7 @@ The original plan (docs/06, "Recommended order") is complete, and the scope was 
 | Theme Builder template for S5 | template 87, layouts 81 and 83 | Built by the user, header and footer edited by Claude |
 | Test movies | posts 92, 93 | Published, with ACF values; post 91 is the user's |
 
-The skill sources in `skills/` match the stored skills byte for byte (md5 checked after every upload, last on 21 October 2026).
+The skill sources in `skills/` match the stored skills byte for byte (md5 checked after every upload, last on 21 October 2026). The repo has changed since; resync before relying on the Studio copies.
 
 ### What was tested (on Divi 5.15.1; T1, T6, T10 and T12 rerun on 5.16.0 in T23 and T12b)
 
@@ -64,7 +68,6 @@ The skill sources in `skills/` match the stored skills byte for byte (md5 checke
 ## Open items
 
 - 8881 needs every skill changed after 22 October 15:00 resynced (`divi5-core`, `divi5-dynamic`, `divi5-modules`, `divi5-styling`, `divi5-theme-builder`, `divi5-page-production`, `divi5-design-system`); it was not running.
-- Local folder still named `novamira-d5`; the repo is now `novamira-divi`.
 - A charity's staging site on Krystal is set up (T31) and passed a fresh-agent regression run (T32); Divi's caches and LiteSpeed's page cache both refresh on save there (T33, T33b); a layout edit's reach into the LiteSpeed cache is untested; writes there are logged in the git-ignored `site-logs/`, not docs/08. Its PHP 8.3.35 needs checking with Krystal (CVE-2026-109618/109619).
 - Rerun `novamira-setup` on a fresh site to exercise its new steps: inactive Divi, the footer-widget and permission offers, and `site-logs/`.
 
@@ -72,7 +75,7 @@ The skill sources in `skills/` match the stored skills byte for byte (md5 checke
 
 | Next step | Why | Needs |
 |---|---|---|
-| Real sites | Use the skills on Foodbank and Bristol Charities staging builds | Staging sites with Novamira, never live |
+| Real sites | Use the skills on real charity site builds (one staging site so far, T31 to T34; one production build at its owner's request, T35) | Staging sites with Novamira; production only by explicit exception |
 | Upgrade checks | Divi ships weekly | After each Divi or Novamira update, read the changelogs and rerun only the tests the changes touch (T23 is the pattern) |
 | Divi MCP alongside Novamira | Elegant Themes is releasing an official Divi MCP that would replace most of the Divi write route | Its release; the plan is the next section |
 

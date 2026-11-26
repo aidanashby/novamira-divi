@@ -60,4 +60,4 @@ $saved = $G::save_data($G::prepare_data($schema));
 - `Style::render()` returns module CSS only; preset CSS is printed separately, so a PHP render check shows the preset classes but not the preset's styles. Check the result in a browser.
 - In a browser, check the modules that use the preset. For buttons, look at a screenshot: Divi animates button backgrounds, so a script reading the computed colour can report transparent even when the colour shows.
 
-Adapted in part from divilovewp/divi5-skill (MIT, copyright 2026 Shashank Gupta, divilove.com), verified and rewritten for Divi 5.15.1. The skill's advice not to include `groupPreset` does not hold on 5.15.1.
+Adapted in part from divilovewp/divi5-skill (MIT, copyright 2026 Shashank Gupta, divilove.com), verified and rewritten for Divi 5.15.1.

@@ -1,4 +1,4 @@
-Tested on Divi 5.15.1, WordPress 7.1.3 (14 October 2026). If `ET_BUILDER_VERSION` differs, treat version-sensitive rules as "verify on this site".
+Tested on Divi 5.15.1, WordPress 7.1.3 (14 October 2026), and used on 5.16.0 and 5.19.1 (T23 to T35). If `ET_BUILDER_VERSION` differs, treat version-sensitive rules as "verify on this site".
 
 ## Ground rules
 

@@ -84,7 +84,7 @@ $err = $G::set_global_variables($data, $prev);   // null on success, WP_Error ot
 ```
 
 - Pass every existing variable back: Divi rejects a save that drops an existing `gvid-` ID, so a variable cannot be deleted this way. Delete or archive a colour or variable only with the user's explicit approval. When proposing it, say what changes: every reference to it on every page stops resolving (an unknown ID renders as nothing), so list the pages that use it first. Divi's save cannot delete a variable; set its `status` to `archived` (the user can remove it in the Variable Manager).
-- On WP Studio (SQLite) Divi's save lock always fails, because the database answers `GET_LOCK()` with `1=1`; the filter above fixes it for this request only. MySQL sites do not need it. The Studio site here also has an mu-plugin, `studio-divi-variables-lock.php`, that applies the filter everywhere, so the builder can save.
+- On WP Studio (SQLite) Divi's save lock always fails, because the database answers `GET_LOCK()` with `1=1`; the filter above fixes it for this request only. MySQL sites do not need it. If the site has the mu-plugin `studio-divi-variables-lock.php` (installed by `novamira-setup` on SQLite sites), it applies the filter everywhere, so the builder can save too.
 - Read back with `get_global_colors()` or `get_global_variables()`, then check a page using it in a browser.
 
 ## Responsive

@@ -2,7 +2,7 @@
 
 **Project:** `novamira-d5`  
 **Purpose:** Implementation brief for Claude Code  
-**Status:** Proposed work. Inspect the current repository and site before making changes.
+**Status:** Done (15 October 2026): `divi5-design-system` and `divi5-page-production` were built from this brief (T20, T22). Kept as the design record. The project was then named `novamira-d5`; it is now `novamira-divi`.
 
 ## 1. Mission
 

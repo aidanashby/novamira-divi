@@ -10,7 +10,8 @@ Run from a clone of this repo (`novamira-divi`). The site's Novamira MCP tools m
 ## 0. Which site, and is it allowed
 
 1. Call `novamira/execute-php` with `return [home_url(), wp_get_environment_type(), get_bloginfo('name')];`.
-2. Name the URL and environment to the user and ask with the choice tool whether this is the site to set up. Novamira gives full admin, PHP and file access, so never set it up on a production site (environment `production`, or a live domain); a `local` or `development` site needs the user's yes, and a staging site their explicit yes after naming the risk.3. If several Novamira servers are connected, confirm with the user which one is this site before writing anything.
+2. Name the URL and environment to the user and ask with the choice tool whether this is the site to set up. Novamira gives full admin, PHP and file access, so never set it up on a production site (environment `production`, or a live domain); a `local` or `development` site needs the user's yes, and a staging site their explicit yes after naming the risk.
+3. If several Novamira servers are connected, confirm with the user which one is this site before writing anything.
 
 ## 1. Checks, and what each result means
 
@@ -38,8 +39,8 @@ return [
 | `divi` below 5.0 | Stop. Divi 4 stores pages differently. |
 | `divi` 5.x below 5.7.0 | Warn the user: 5.7.0 is the earliest version with every feature the skills use (docs/00, "Setup skill: version rules"). Continue, then run the T1 round-trip check in step 5 before any page work. |
 | `divi` 5.7.0 or later | Continue. No warning. |
-| Any of `novamira/execute-php`, `novamira/skill-write`, `novamira/skill-edit`, `novamira/skill-get`, `novamira/agent-context` missing | Stop and name the missing ability; the Novamira version or its settings differ from the tested 1.12.9 to 1.12.11. |
-| `novamira` outside 1.12.9 to 1.12.12 | Continue, and tell the user the skills were tested on 1.12.9 to 1.12.12. |
+| Any of `novamira/execute-php`, `novamira/skill-write`, `novamira/skill-edit`, `novamira/skill-get`, `novamira/agent-context` missing | Stop and name the missing ability; the Novamira version or its settings differ from the tested versions (1.12.9 to 1.12.12, 1.12.16). |
+| `novamira` not 1.12.9 to 1.12.12 or 1.12.16 | Continue, and tell the user which versions the skills were tested on. |
 | `db` is `sqlite` (WP Studio) | Install the lock fix in step 3. |
 | `footer_widgets` not empty | Note it for step 6 (WordPress's default Archives and Categories blocks usually sit in Divi's footer on a new site). |
 | A skill named in the manifest already exists | Go on, but in step 2 compare first and ask before replacing a copy that differs from the repo. |

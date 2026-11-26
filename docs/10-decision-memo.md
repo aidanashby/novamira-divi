@@ -2,6 +2,8 @@
 
 14 October 2026. Site: Studio `divi-5`, Divi 5.15.1, Novamira 1.12.9 free. Evidence in docs/09; every site write in docs/08.
 
+> Update, 26 November 2026: gate (d) later changed in practice. Since 15 October agents may propose new global colours, variables and presets and write them once the user agrees (`divi5-styling`, `divi5-presets`). LiteSpeed and published-page caches were tested in T33. There are eight skills.
+
 ## Decisions (user, 14 October 2026)
 
 - Gate (e): **no Novamira Pro.**

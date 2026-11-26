@@ -1,5 +1,7 @@
 # 01. Goal and environment
 
+> Snapshot of 14 October 2026 (Divi 5.15.1, Novamira 1.12.9). Current versions and status: docs/00.
+
 ## Background
 
 The user (Aidan) runs several WordPress sites on Divi 5 and wants Claude to build and edit Divi 5 pages programmatically, on those sites and on a rebuild of his own freelance site (Lucid Rhino Web Design). Constraints he has stated: Divi 5 only (not Divi 4), reseller hosting at Krystal rather than a VPS, and interest in what is free versus paid and whether documentation is enough to build his own tooling. He has already evaluated other Divi 5 AI tooling (DiviOps, Respira and others) and a prior independent review of `doughoseck/divi5-builder` exists locally (see below). A previous finding of his: content injected through the WordPress REST API into Divi 5 pages can appear blank in the Visual Builder. This project tests whether Novamira's route (PHP running inside WordPress) avoids that.

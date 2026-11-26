@@ -29,8 +29,8 @@ The site instructions installed with the skills tell Claude to:
 
 You need:
 
-- WordPress with **Divi 5.7.0 or later** (tested on 5.15.1 and 5.16.0). Divi 4 is not supported.
-- The **Novamira** plugin (free version, tested on 1.12.9 to 1.12.12).
+- WordPress with **Divi 5.7.0 or later** (tested on 5.15.1, 5.16.0 and 5.19.1). Divi 4 is not supported.
+- The **Novamira** plugin (free version, tested on 1.12.9 to 1.12.12 and 1.12.16).
 - **Claude Code**, connected to the site through Novamira.
 - A **development or staging copy** of the site. Never use this on a live site: Novamira gives the connected agent full administrator, PHP, database and file access.
 
@@ -39,6 +39,8 @@ You need:
 1. On the development or staging site, install the Divi theme and the Novamira plugin, and activate Novamira. (If Divi is installed but not active, setup offers to activate it.)
 2. In wp-admin go to **Novamira, Configuration** (on some versions **Novamira, Connect**), choose **Claude Code**, create an application password, and click **Copy prompt**.
 3. Start Claude Code in a clone of this repository and paste the prompt. Claude writes the connection settings and asks you to restart the session. Keep the prompt private: it contains the password.
+Novamira also offers a command-line connection (the Novamira CLI) instead of the MCP prompt. The skills work through either; `novamira-setup` is written for the MCP connection, and on a CLI-connected site its steps were followed by hand (T35).
+
 4. After the restart, ask Claude: "Set up this site for Divi 5." The `novamira-setup` skill then:
    - checks the Divi and Novamira versions, and offers to activate Divi if it is installed but inactive;
    - uploads every skill in `skills/manifest.json` and checks each copy byte for byte;

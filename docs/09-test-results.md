@@ -51,7 +51,7 @@ Verdict: `divi/global-layout` is current in 5.15.1. docs/04's "probably stale" w
 - On a preview (`is_preview()`), Divi skips dynamic assets: it loads every module script and writes no `_divi_dynamic_assets_cached_modules` meta (draft ID 26). So drafts cannot show the stale-cache bug. It applies only to published pages seen by visitors.
 - Source (`DynamicAssets.php`): when the meta exists it is used as the page's module list and never re-detected; nothing in the dynamic-assets code invalidates it on a programmatic content change. The skill's claim is consistent with 5.15.1 source.
 - Divi's own invalidation is `ET_Core_PageResource::remove_static_resources($post_id, 'all')`, which calls `clear_post_meta_caches()` (deletes `et_enqueued_post_fonts`, `_et_dynamic_cached_shortcodes`, `_et_dynamic_cached_attributes`, `_et_builder_module_features_cache`, `_divi_dynamic_assets_cached_modules`, `_divi_dynamic_assets_cached_feature_used`, `_divi_dynamic_assets_canvases_used`) and removes static CSS. It returns early unless the current user can `edit_posts`, which holds under Novamira (user 1). Tested on draft 26: planted cache meta was removed.
-- Rule for the skill: after any programmatic write, call `ET_Core_PageResource::remove_static_resources($id, 'all')`. A live published-page reproduction was not run (publishing is outside the standing approvals) and is not needed for the rule.
+- Rule for the skill: after any programmatic write, call `ET_Core_PageResource::remove_static_resources($id, 'all')`. (Later, T33: on MySQL hosting a `wp_update_post()` save already refreshed the published page's caches; the call stays as a cheap extra.) A live published-page reproduction was not run (publishing is outside the standing approvals) and is not needed for the rule.
 
 ## Editing round trip [Run, 2026-10-14]
 
@@ -431,14 +431,14 @@ On a charity's staging site on Krystal (MySQL, LiteSpeed Cache 7.9.2 on, Divi st
 
 ## T34. A real page on the staging site [Run, 2026-10-22]
 
-The user asked for page 6834 on the staging site to be rebuilt for the 2026 Big Give winter appeal, with facts only from the Big Give campaign page and data and the site's Bridge page. Built with the skills, then revised at the user's direction. Verified in a browser at 1280px and 375px.
+The user asked for page 6834 on the staging site to be rebuilt for a 2026 winter match-funding appeal, with facts only from the campaign platform's page and data and one of the site's own pages. Built with the skills, then revised at the user's direction. Verified in a browser at 1280px and 375px.
 
 - Number counter: the percent sign is `number.advanced.enablePercentSign`; `percentSign` (the circle counter's key) was ignored and the `%` stayed. The module takes digits only, so a currency sign came from the site's own CSS class (`.pound .percent-value:before { content:'£' }` in the child theme), added through the CSS class attribute; the browser showed "£1200".
 - Image shape: `module.advanced.sizing` `aspectRatio {width 4, height 3}` with `image.decoration.fit` `objectFit: cover` gave three images at 588x441 with `aspect-ratio: 4 / 3` and `object-fit: cover`.
 - Icon list item `icon` `{"unicode":"&#x4e;","type":"divi","weight":"400"}` rendered the ETmodules check mark.
 - Accordion `module.decoration.sizing.maxWidth` `760px` measured 760px.
-- A `modulePreset` of the site's "Tertiary button" styled the Bridge link button.
-- Lessons for page work: the first draft added claims from general knowledge of Big Give (gifts doubled "while the match funding lasts", "give early") that the campaign did not state; the user's check removed them. `divi5-page-production` already says not to invent facts; the general-knowledge slip is the case to watch.
+- A `modulePreset` of the site's "Tertiary button" styled the link button.
+- Lessons for page work: the first draft added claims from general knowledge of the campaign platform (about match funding running out and giving early) that the campaign did not state; the user's check removed them. `divi5-page-production` already says not to invent facts; the general-knowledge slip is the case to watch.
 
 Skills updated: `divi5-modules` (number counter, icon list icon) and `divi5-styling` (image shape). Synced to the staging site; 8881 was not reachable, so its copies are pending.
 

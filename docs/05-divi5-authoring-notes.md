@@ -1,6 +1,8 @@
-# 05. Divi 5 authoring notes (unverified until tested)
+# 05. Divi 5 authoring notes (historical; superseded by the skills)
 
-Distilled from `divilovewp/divi5-skill` v0.6.9 (Divi 5.11.1, MIT, see NOTICE.md) and from the independent review of `doughoseck/divi5-builder` (2 October 2026, since deleted; measured on Divi 5.14.0 in WP Studio). Rewritten in condensed form. Every item is [Skill] unless marked. **Do not put any of this into a skill as fact until it has been run on the Studio site (5.15.1).** Tests are in docs/06.
+> Kept as the record of what the upstream skill claimed before testing. The skills in `skills/` and the results in docs/09 replace it. Several rules below were later proved wrong or changed: the old `htmlAttributes` form (rule 12), "do not include groupPreset" (rule 14), the testimonial portrait key, gallery images in JSON, the percent sign, hard-coded `builderVersion` in the skeleton, and the cache meta to delete. Do not copy rules from here.
+
+Distilled from `divilovewp/divi5-skill` v0.6.9 (Divi 5.11.1, MIT, see NOTICE.md) and from the independent review of `doughoseck/divi5-builder` (2 October 2026, since deleted; measured on Divi 5.14.0 in WP Studio). Rewritten in condensed form. Every item is [Skill] unless marked. **Do not put any of this into a skill as fact until it has been run on the Studio site (5.15.1).** Tests are in docs/09.
 
 ## Status after T0 to T6 (14 October 2026, Divi 5.15.1) [Run]
 
