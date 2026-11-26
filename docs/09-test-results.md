@@ -458,7 +458,7 @@ Skills updated from these: `divi5-core`, `divi5-dynamic`, `divi5-theme-builder`,
 
 ## T35. First use on Divi 5.19.1 and Novamira 1.12.16 [Run, 2026-11-25]
 
-A site running WordPress 7.1.5, Divi 5.19.1 and Novamira 1.12.16, reached through the Novamira CLI 1.3.6 (REST, no MCP). It was a production site, used at its owner's explicit request as an exception to the repo rule; pages were built as drafts. In progress: the skills have not been changed for these findings.
+A site running WordPress 7.1.5, Divi 5.19.1 and Novamira 1.12.16, reached through the Novamira CLI 1.3.6 (REST, no MCP). It was a production site, used at its owner's explicit request as an exception to the repo rule; pages were built as drafts. The findings below are now in `divi5-styling`, `divi5-modules` and `divi5-dynamic` (26 November 2026).
 
 Held up as written:
 
@@ -492,3 +492,12 @@ Second session, same site (Divi 5.19.1, ACF 6.8.12; read from source, rendered o
 - Group Carousel arrows are spans with `role="button"`, `tabindex` and labels; `arrows.advanced.size` set their width.
 - Saving a draft through `wp_update_post()` made LiteSpeed rebuild the public pages' cache; their content was the same.
 - `parse_blocks()` then `serialize_blocks()` returned three Divi pages unchanged, so edits can be made in place on the parsed blocks.
+
+Third session, same site (26 November 2026, checked in a browser at 1440, 1280, 1024, 768, 414, 375 and 360px):
+
+- Number Counter titles are always headings (`h1` to `h6`, default `h3`; source). Inside a flex Group the counter rendered 144px wide and centred; `module.decoration.sizing` width 100% fixed it. `module.decoration.layout` `rowGap` closed the gap between number and title.
+- A Group or section with `module.advanced.html` `elementType` `section`, `ul` or `li` rendered with that tag. A `ul` Group kept the browser's 40px list indent until its padding-left was set to 0.
+- `aria-labelledby` on a section pointing at an `id` attribute on its Heading module gave each section its heading as its name.
+- A section sticky `top` with `offset.surrounding` `on` stuck below a sticky header; `phone` `position` `none` turned it off on phones. Row padding `0px` in `spacing.desktop.sticky` applied only while stuck.
+- Button preset border radius changed from 999px to 0px through `prepare_data()` and `save_data()`; no other preset changed.
+- Builder edits by the user between sessions were kept by parsing the stored blocks, changing them and serialising again.

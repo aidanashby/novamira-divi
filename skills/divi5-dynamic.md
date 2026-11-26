@@ -1,4 +1,4 @@
-Tested on Divi 5.15.1 with ACF 6.8.10 (14 October 2026) and Date Conditions for Divi 0.1.4 on Divi 5.16.0 (21 October 2026), using the `movie` post type: a Loop Builder page and a Theme Builder template for single movies, both checked in a browser. Load `divi5-core` first.
+Tested on Divi 5.15.1 with ACF 6.8.10 (14 October 2026) and Date Conditions for Divi 0.1.4 on Divi 5.16.0 (21 October 2026), using the `movie` post type: a Loop Builder page and a Theme Builder template for single movies, both checked in a browser. Items marked 5.19.1 were added on Divi 5.19.1 with ACF 6.8.12 (25 and 26 November 2026, T35). Load `divi5-core` first.
 
 ## Dynamic content values
 
@@ -62,7 +62,10 @@ Any module or group repeats once per result when `module.advanced.loop` is set:
 - Filter by taxonomy term with `includePostWithSpecificTerms` or `excludePostWithSpecificTerms`, a list of `{"categoryId":"<taxonomy>","selectedOptions":[{"value":"<term ID>","label":"<name>"}]}` (verified with `genre`). Several terms in one taxonomy match any of them. A term filter and a `metaQuery` together must both match (verified: Sci-fi and released on or after 1 December gave one movie), so combine them for "genre and date" listings.
 - Show a post's terms with `loop_post_terms` and settings `taxonomy_type` (the taxonomy name; the default is `category`), `separator` (`", "`) and `links` (`on` links each term to its archive).
 - Other keys Divi reads: `postOffset`, `ignoreStickysPost`, `includeSpecificPosts`, `excludeSpecificPosts`, `search` (not tested here).
-- Use published posts for loop tests; Divi's query skips drafts (verified, T29).
+- Use published posts for loop tests; Divi's query skips drafts (verified, T29). To check a loop without publishing anything, render the page in one `execute-php` call after `add_action('pre_get_posts', fn($q) => $q->set('post_status', ['publish', 'draft']))`, limited to the loop's post type; the action lasts only for that call (5.19.1). A filter on `divi_module_options_loop_post_type_results_query_args` did not affect this render.
+- Terms from two taxonomies in `includePostWithSpecificTerms` are joined with OR, so "category Stories and programme X" returns posts with either. Adding any `excludePostWithSpecificTerms` entry (for example Uncategorized) makes Divi join every part with AND (5.19.1, source and the built query).
+- An empty loop prints "No Results Found." with an `h2` and a sentence in place of the looped item. It does not take the item's own inline styling, only styling from a module preset, so on a dark section it can be unreadable (5.19.1). Tell the user; hiding an empty section needs Date Conditions for Divi's empty state or other work.
+- An ACF File field (return format URL) as `loop_post_meta_key_<field>` gave the file URL. Two dynamic values in one `linkUrl`, one empty, gave the other, so one card link can serve a File field and a URL field; if both hold values they join into a broken link (5.19.1).
 
 ## Show or hide by date (display conditions)
 

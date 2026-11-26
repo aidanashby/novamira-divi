@@ -1,4 +1,4 @@
-Tested on Divi 5.15.1 (14 October 2026) and rechecked on 5.16.0 (21 October 2026) by rendering each shape and reading the emitted CSS. Load `divi5-core` first; this skill only adds styling paths. If `ET_BUILDER_VERSION` differs, verify on this site.
+Tested on Divi 5.15.1 (14 October 2026) and rechecked on 5.16.0 (21 October 2026) by rendering each shape and reading the emitted CSS. Rows marked 5.19.1 were added on Divi 5.19.1 (25 and 26 November 2026, T35). Load `divi5-core` first; this skill only adds styling paths. If `ET_BUILDER_VERSION` differs, verify on this site.
 
 ## Rules
 
@@ -19,7 +19,9 @@ Tested on Divi 5.15.1 (14 October 2026) and rechecked on 5.16.0 (21 October 2026
 | `sizing` | `{"maxWidth":"720px","minHeight":"400px"}` (columns also carry `flexType` here). To centre a module narrower than its column, set `"width":"100%"` with `maxWidth` and `"alignment":"center"`; without the width it shrinks to its content, so an accordion changes width as items open (verified on 5.16.0) |
 | `filters` | `{"opacity":"90%","backdropBlur":"8px"}` (backdrop needs a translucent background to show) |
 | `position` and `zIndex` | `position`: `{"mode":"relative","offset":{"vertical":"15px","horizontal":"30px"}}` emits `top: 15px; left: 30px`; `zIndex`: `"2"` |
-| `sticky` | `{"position":"top","offset":{"top":"40px"}}` (also `bottom`, `topBottom`). Applied by Divi's script, so check it in a browser: it held in the column on scroll. |
+| `sticky` | `{"position":"top","offset":{"top":"40px"}}` (also `bottom`, `topBottom`). Applied by Divi's script, so check it in a browser: it held in the column on scroll. 5.19.1: a section set to `top` with `"offset":{"surrounding":"on"}` stuck below an already-sticky header; `{"phone":{"value":{"position":"none"}}}` turned it off on phones. A value that applies only while stuck sits beside `value`, like hover: `"spacing":{"desktop":{"value":{...},"sticky":{"padding":{"top":"0px","bottom":"0px"}}}}` (header row padding 0 once stuck). Two sticky bars on a phone can cover a third of the screen; check it. |
+| `layout` grid (5.19.1) | `{"display":"grid","gridColumnWidths":"equal","gridColumnCount":"3","columnGap":"24px","rowGap":"24px"}` on a Group, with `gridColumnCount` `"2"` at `tablet` and `"1"` at `phone`: each child Group becomes a grid cell. Simpler than a looped column for fixed sets of cards. |
+| `disabledOn` (5.19.1) | `{"desktop":{"value":"on"},"tablet":{"value":"off"},"phone":{"value":"off"}}` hides the module on desktop only. Set every breakpoint. Used for separate desktop and phone navigation in one header. |
 | `background` video | `{"color":"#1e3a5f","video":{"mp4":"<URL>","width":"1280","height":"720"}}` (`webm` also accepted). Renders a muted, looping, autoplay video behind the section. Keep a fallback `color`. |
 | `background` image with gradient overlay | `{"color":"#1e3a5f","image":{"url":"<URL>","size":"cover","position":"center"},"gradient":{"enabled":"on","overlaysImage":"on","type":"linear","direction":"90deg","stops":[...]}}`. Renders the gradient layered over the image, both `cover` and centred (checked in a browser on 5.16.0). Use translucent stop colours so the image shows through. Leave out `gradient` for an image alone. |
 
@@ -33,6 +35,9 @@ Image module shape: `module.advanced.sizing.<bp>.value` `{"width":"100%","aspect
 - Heading module: `title.decoration.font.font.<bp>.value`.
 - Keys (verified): `size` (`"21px"`), `color`, `weight` (`"700"`), `lineHeight` (`"1.6em"`), `letterSpacing` (`"1px"`), `textAlign` (`"center"`; on the Text module Divi 5.16 ignores it). For alignment on Text and Heading modules use `module.advanced.text.text.<bp>.value.orientation` (`"left"`, `"center"`, `"right"`): both emit `text-align` (verified on 5.16.0), `capitalization` (`"uppercase"`, `"lowercase"`, `"capitalize"`, `"smallCaps"`, `"allSmallCaps"`). Heading also takes `headingLevel`. `family` sets the font (`"Georgia"`, or a Google font such as `"Roboto Slab"` or `"Lato"`, which Divi enqueues itself). Button text font is `button.decoration.font.font`.
 - `style:["uppercase"]` emits nothing. Use `capitalization`. `style` is for italic, underline and similar.
+- Headings take the theme's letter spacing unless the heading font sets its own: `"letterSpacing":"0px"` cleared it (5.19.1).
+- Large single-line text (stat numbers) at `lineHeight` `1em` showed a scrollbar, because the Text module has `overflow-y: auto` and the glyphs are taller than the line. `module.decoration.overflow` `visible` did not help. Use `1.3em` or more, and check in a browser (5.19.1).
+- Button padding goes on the Button module's `module.decoration.spacing`, in presets too. On `button.decoration.spacing` it had no effect (5.19.1). For touch targets, keep buttons at least 44px high (padding plus line height), and measure them in a browser.
 
 ## Site colours and variables
 
